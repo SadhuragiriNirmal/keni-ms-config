@@ -24,3 +24,20 @@ eureka:
   instance:
     lease-renewal-interval-in-seconds: 30
     lease-expiration-duration-in-seconds: 90
+
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      userService:
+        registerHealthIndicator: true
+        slidingWindowSize: 5
+        failureRateThreshold: 50
+        waitDurationInOpenState: 10s
+        permittedNumberOfCallsInHalfOpenState: 3
+  retry:
+    instances:
+      userService:
+        max-attempts: 3
+        wait-duration: 2s
+
